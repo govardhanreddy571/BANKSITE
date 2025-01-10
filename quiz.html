@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Bank App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      margin: auto;
+      width: 400px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    input {
+      padding: 10px;
+      width: 80%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    #transactions {
+      text-align: left;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Simple Bank App</h2>
+  <h3>Balance: $<span id="balance">0</span></h3>
+  
+  <input type="number" id="amount" placeholder="Enter amount">
+  <br>
+  <button onclick="deposit()">Deposit</button>
+  <button onclick="withdraw()">Withdraw</button>
+  
+  <div id="transactions">
+    <h4>Transaction History</h4>
+    <ul id="history"></ul>
+  </div>
+</div>
+
+<script>
+  let balance = 0;
+  const balanceDisplay = document.getElementById('balance');
+  const amountInput = document.getElementById('amount');
+  const historyList = document.getElementById('history');
+
+  function deposit() {
+    const amount = parseFloat(amountInput.value);
+    if (amount > 0) {
+      balance += amount;
+      updateBalance();
+      logTransaction(`Deposited $${amount}`);
+    } else {
+      alert('Enter a valid amount');
+    }
+    amountInput.value = '';
+  }
+
+  function withdraw() {
+    const amount = parseFloat(amountInput.value);
+    if (amount > 0 && amount <= balance) {
+      balance -= amount;
+      updateBalance();
+      logTransaction(`Withdrew $${amount}`);
+    } else {
+      alert('Invalid amount or insufficient balance');
+    }
+    amountInput.value = '';
+  }
+
+  function updateBalance() {
+    balanceDisplay.textContent = balance.toFixed(2);
+  }
+
+  function logTransaction(message) {
+    const listItem = document.createElement('li');
+    listItem.textContent = `${new Date().toLocaleString()}: ${message}`;
+    historyList.prepend(listItem);
+  }
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p>This is bank site app</p>
+</body>
+</html>
